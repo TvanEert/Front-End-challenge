@@ -28,7 +28,7 @@ body {
   top: 15vh;
   left: 1vw;
 }
-.btn {
+.btnStyle {
   display: inline-block;
   background-color: black;
   height: 60px;
@@ -39,6 +39,10 @@ body {
   font-weight: bold;
   line-height: 24px;
   color: white;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
+}
+
+.mainPageBtns {
+  display: none;
 }
