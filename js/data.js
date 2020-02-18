@@ -91,8 +91,7 @@ var subjects = [
   },
   {
     title: "Groepsbelediging",
-    statement:
-      "Belediging van groepen op grond van ras, godsdienst of geaardheid moet niet langer strafbaar zijn.",
+    statement: "Belediging van groepen op grond van ras, godsdienst of geaardheid moet niet langer strafbaar zijn.",
     parties: [
       {
         name: "PVV",
