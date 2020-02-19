@@ -1,14 +1,16 @@
-let startBtn = document.querySelector("#startBtn");
-let startPage = document.querySelector(".startP");
-let mainPage = document.querySelector(".mainP");
-let mainPageBtns = document.querySelector(".mainPageBtns");
-let title = document.createElement("h1");
-let question = document.createElement("h2");
-let proBtn = document.querySelector("#proBtn");
-let noneBtn = document.querySelector("#noneBtn");
-let contraBtn = document.querySelector("#contraBtn");
-let backBtn = document.querySelector("#backBtn");
-let MainPText = document.querySelector(".MainPText");
+const startBtn = document.querySelector("#startBtn");
+const startPage = document.querySelector(".startP");
+const mainPage = document.querySelector(".mainP");
+const mainPageBtns = document.querySelector(".mainPageBtns");
+const title = document.createElement("h1");
+const question = document.createElement("h2");
+const proBtn = document.querySelector("#proBtn");
+const noneBtn = document.querySelector("#noneBtn");
+const contraBtn = document.querySelector("#contraBtn");
+const backBtn = document.querySelector("#backBtn");
+const btnSkip = document.querySelector(".btnSkip");
+const MainPText = document.querySelector(".MainPText");
+const resultContainer = document.querySelector(".resultContainer");
 
 let counter = 0;
 let questionNum = 1;
@@ -36,6 +38,10 @@ backBtn.addEventListener("click", () => {
   back();
 });
 
+btnSkip.addEventListener("click", () => {
+  updateQuestion("skip");
+});
+
 function initMainP() {
   mainPageBtns.style.display = "flex";
   backBtn.style.display = "initial";
@@ -47,11 +53,21 @@ function initMainP() {
 
 function updateQuestion(answer) {
   answers.push(answer);
-  counter++;
-  questionNum++;
-  title.innerHTML = questionNum + ". " + subjects[counter].title;
-  question.innerHTML = subjects[counter].statement;
-  console.log(answers);
+  if (counter < subjects.length - 1) {
+    counter++;
+    questionNum++;
+    title.innerHTML = questionNum + ". " + subjects[counter].title;
+    question.innerHTML = subjects[counter].statement;
+    console.log(answers);
+  } else {
+    console.log(answers);
+    question.style.display = "none";
+    mainPageBtns.style.display = "none";
+    backBtn.style.display = "none";
+    title.innerHTML = "Resultaten";
+    resultContainer.style.display = "block";
+    calcScore();
+  }
 }
 
 function back() {
@@ -62,5 +78,30 @@ function back() {
     title.innerHTML = questionNum + ". " + subjects[counter].title;
     question.innerHTML = subjects[counter].statement;
     console.log(answers);
+  }
+}
+
+function calcScore() {
+  for (let i = 0; i < answers.length; i++) {
+    for (let p = 0; p < parties.length; p++) {
+      if (subjects[i].parties[p].position == answers[i]) {
+        if (!parties[p].score) parties[p].score = 1;
+        else parties[p].score = parties[p].score + 1;
+      }
+    }
+  }
+  console.log(parties);
+}
+
+function displayResult() {
+  calcAnswer();
+  for (let i = 0; i < parties.length; i++) {
+    var p = document.createElement("p");
+    if (parties[i].score) {
+      p.innerHTML = parties[i].name + " " + parties[i].score;
+    } else {
+      p.innerHTML = parties[i].name + " 0";
+    }
+    result_container.appendChild(p);
   }
 }

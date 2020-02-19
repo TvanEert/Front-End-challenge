@@ -63,6 +63,10 @@ h1 {
   font-weight: bold;
 }
 
+h2 {
+  min-height: 150px;
+}
+
 #backBtn {
   display: none;
   margin-top: 15px;
@@ -95,4 +99,8 @@ h1 {
   position: relative;
   top: 8px;
   left: 5px;
+}
+
+.resultContainer {
+  display: none;
 }
