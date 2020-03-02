@@ -66,7 +66,7 @@ function updateQuestion(answer) {
     backBtn.style.display = "none";
     title.innerHTML = "Resultaten";
     resultContainer.style.display = "block";
-    calcScore();
+    displayResult();
   }
 }
 
@@ -94,14 +94,14 @@ function calcScore() {
 }
 
 function displayResult() {
-  calcAnswer();
+  calcScore();
   for (let i = 0; i < parties.length; i++) {
-    var p = document.createElement("p");
+    let pScores = document.createElement("p");
     if (parties[i].score) {
-      p.innerHTML = parties[i].name + " " + parties[i].score;
+      pScores.innerHTML = parties[i].name + " " + parties[i].score;
     } else {
-      p.innerHTML = parties[i].name + " 0";
+      pScores.innerHTML = parties[i].name + " 0";
     }
-    result_container.appendChild(p);
+    resultContainer.appendChild(pScores);
   }
 }
