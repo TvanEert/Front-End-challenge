@@ -4,11 +4,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/w3.css" />
     <link rel="stylesheet" type="text/css" href="css/master.css" />
-    <script src="https://kit.fontawesome.com/6185da5d11.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/6185da5d11.js"
+      crossorigin="anonymous"
+    ></script>
     <title>StemWijzer Tweede Kamer 2017</title>
   </head>
   <body>
     <div class="content w3-container w3-white ">
+      <!-- start page -->
       <div class="startP">
         <img class="startPLogo" src="img/logo.png" />
         <div class="startPTextBox">
@@ -17,28 +21,55 @@
             Test uw politieke voorkeur aan de hand van 30 stellingen!
           </h2>
         </div>
-        <button id="startBtn" class="btnStyle w3-hover-blue w3-display-bottommiddle w3-margin-bottom">
+        <button
+          id="startBtn"
+          class="btnStyle w3-hover-blue w3-display-bottommiddle w3-margin-bottom"
+        >
           Start
         </button>
       </div>
+      <!-- Main page -->
       <div class="mainP">
         <button id="backBtn"><i class="fas fa-arrow-left"></i></button>
         <div class="MainPText"></div>
-        <div class="resultContainer"></div>
+
         <div class="mainPageBtns ">
-          <button id="proBtn" class="btnStyle btnUpdate w3-hover-blue  w3-margin-bottom">
+          <button id="proBtn" class="btnStyle w3-hover-blue w3-margin-bottom">
             Eens
           </button>
-          <button id="noneBtn" class="btnStyle btnUpdate w3-hover-blue  w3-margin-bottom">
+          <button id="noneBtn" class="btnStyle w3-hover-blue w3-margin-bottom">
             Geen van beide
           </button>
-          <button id="contraBtn" class="btnStyle btnUpdate w3-hover-blue  w3-margin-bottom">
+          <button
+            id="contraBtn"
+            class="btnStyle w3-hover-blue w3-margin-bottom"
+          >
             Oneens
           </button>
-          <a class="btnSkip">Sla deze vraag over <i class="arrow fas fa-arrow-right"></i></a>
+          <a class="btnSkip"
+            >Sla deze vraag over <i class="arrow fas fa-arrow-right"></i
+          ></a>
         </div>
       </div>
+      <!-- Result Page -->
+      <div class="resultP">
+        <h1 class="resultPTitle">StemWijzer Tweede Kamer 2017</h1>
+        <h2 class="resultPHeader">
+          Kies welke partijen u wilt zien in in de resultaten
+        </h2>
+        <button id="allBtn" class="btnStyle w3-hover-blue w3-margin-bottom">
+          Alle
+        </button>
+        <button id="secBtn" class="btnStyle w3-hover-blue w3-margin-bottom">
+          Seculiere
+        </button>
+        <button id="largeBtn" class="btnStyle w3-hover-blue w3-margin-bottom">
+          Large
+        </button>
+      </div>
+      <div class="resultContainer"></div>
     </div>
+
     <script src="js/data.js"></script>
     <script src="js/app.js"></script>
   </body>
