@@ -8,6 +8,7 @@ const MainPText = document.querySelector(".MainPText");
 //Containers
 const mainPageBtns = document.querySelector(".mainPageBtns");
 const resultContainer = document.querySelector(".resultContainer");
+const nulContainer = document.getElementById("nulContainer");
 
 //Pages
 const resultPage = document.querySelector(".resultP");
@@ -15,15 +16,15 @@ const startPage = document.querySelector(".startP");
 const mainPage = document.querySelector(".mainP");
 
 //Buttons
-const startBtn = document.querySelector("#startBtn");
-const proBtn = document.querySelector("#proBtn");
-const noneBtn = document.querySelector("#noneBtn");
-const contraBtn = document.querySelector("#contraBtn");
-const backBtn = document.querySelector("#backBtn");
+const startBtn = document.getElementById("startBtn");
+const proBtn = document.getElementById("proBtn");
+const noneBtn = document.getElementById("noneBtn");
+const contraBtn = document.getElementById("contraBtn");
+const backBtn = document.getElementById("backBtn");
 const btnSkip = document.querySelector(".btnSkip");
-const allBtn = document.querySelector("#allBtn");
-const secBtn = document.querySelector("#secBtn");
-const largeBtn = document.querySelector("#largeBtn");
+const allBtn = document.getElementById("allBtn");
+const secBtn = document.getElementById("secBtn");
+const largeBtn = document.getElementById("largeBtn");
 
 //Numbers
 let counter = 0;
@@ -57,6 +58,8 @@ backBtn.addEventListener("click", () => {
 btnSkip.addEventListener("click", () => {
   updateQuestion("skip");
 });
+
+//Filter buttons
 allBtn.addEventListener("click", () => {
   displayResult("all");
 });
@@ -108,46 +111,55 @@ function calcScore() {
   for (let i = 0; i < answers.length; i++) {
     for (let p = 0; p < parties.length - 1; p++) {
       if (subjects[i].parties[p].position == answers[i]) {
-        if (!parties[p].score) parties[p].score = 1;
-        else parties[p].score = parties[p].score + 1;
+        for (let index = 0; index < parties.length; index++) {
+          if (subjects[i].parties[p].name == parties[index].name) {
+            if (!parties[index].score) parties[index].score = 1;
+            else parties[index].score = parties[index].score + 1;
+          }
+        }
       }
     }
   }
-  console.log(parties);
 }
 
 function displayResult(arg) {
   resultPage.innerHTML = "";
   calcScore();
-  for (let i = 0; i < parties.length; i++) {
+
+  parties.sort((a, b) => parseFloat(b.score) - parseFloat(a.score));
+
+  for (let parNumber = 0; parNumber < parties.length; parNumber++) {
     if (arg == "sec") {
-      if (parties[i].secular == true) {
+      if (parties[parNumber].secular == true) {
         let pScores = document.createElement("p");
-        if (parties[i].score) {
-          pScores.innerHTML = parties[i].name + " " + parties[i].score;
+        if (parties[parNumber].score) {
+          pScores.innerHTML = parties[parNumber].name + " " + parties[parNumber].score;
+          resultContainer.appendChild(pScores);
         } else {
-          pScores.innerHTML = parties[i].name + " 0";
+          pScores.innerHTML = parties[parNumber].name + " 0";
+          nulContainer.appendChild(pScores);
         }
-        resultContainer.appendChild(pScores);
       }
     } else if (arg == "size") {
-      if (parties[i].size > large) {
+      if (parties[parNumber].size >= large) {
         let pScores = document.createElement("p");
-        if (parties[i].score) {
-          pScores.innerHTML = parties[i].name + " " + parties[i].score;
+        if (parties[parNumber].score) {
+          pScores.innerHTML = parties[parNumber].name + " " + parties[parNumber].score;
+          resultContainer.appendChild(pScores);
         } else {
-          pScores.innerHTML = parties[i].name + " 0";
+          pScores.innerHTML = parties[parNumber].name + " 0";
+          nulContainer.appendChild(pScores);
         }
-        resultContainer.appendChild(pScores);
       }
     } else if (arg == "all") {
       let pScores = document.createElement("p");
-      if (parties[i].score) {
-        pScores.innerHTML = parties[i].name + " " + parties[i].score;
+      if (parties[parNumber].score) {
+        pScores.innerHTML = parties[parNumber].name + " " + parties[parNumber].score;
+        resultContainer.appendChild(pScores);
       } else {
-        pScores.innerHTML = parties[i].name + " 0";
+        pScores.innerHTML = parties[parNumber].name + " 0";
+        nulContainer.appendChild(pScores);
       }
-      resultContainer.appendChild(pScores);
     }
   }
 }

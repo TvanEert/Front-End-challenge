@@ -10,7 +10,7 @@ body {
 .content {
   display: block;
   width: 100%;
-  height: 81vh;
+  min-height: 81vh;
   max-width: 1255px;
   margin: 0 auto;
   position: relative;
@@ -106,6 +106,11 @@ h2 {
 }
 
 .resultContainer {
-  overflow: hidden;
-  height: 81vh;
+  position: relative;
+  top: 25px;
+}
+
+#nulContainer {
+  position: relative;
+  top: 25px;
 }
