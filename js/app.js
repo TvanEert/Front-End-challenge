@@ -25,6 +25,7 @@ const btnSkip = document.querySelector(".btnSkip");
 const allBtn = document.getElementById("allBtn");
 const secBtn = document.getElementById("secBtn");
 const largeBtn = document.getElementById("largeBtn");
+const checkBox = document.getElementById("checkBox");
 
 //Numbers
 let counter = 0;
@@ -41,22 +42,27 @@ startBtn.addEventListener("click", () => {
 
 proBtn.addEventListener("click", () => {
   updateQuestion("pro");
+  checkBox.checked = false;
 });
 
 noneBtn.addEventListener("click", () => {
   updateQuestion("none");
+  checkBox.checked = false;
 });
 
 contraBtn.addEventListener("click", () => {
   updateQuestion("contra");
+  checkBox.checked = false;
 });
 
 backBtn.addEventListener("click", () => {
   back();
+  checkBox.checked = false;
 });
 
 btnSkip.addEventListener("click", () => {
   updateQuestion("skip");
+  checkBox.checked = false;
 });
 
 //Filter buttons
@@ -82,7 +88,8 @@ function initMainP() {
 }
 
 function updateQuestion(answer) {
-  answers.push(answer);
+  if (checkBox.checked) answers.push({ opinion: answer, checked: true });
+  else answers.push({ opinion: answer, checked: false });
   if (counter < subjects.length - 1) {
     counter++;
     questionNum++;
@@ -109,12 +116,17 @@ function back() {
 
 function calcScore() {
   for (let i = 0; i < answers.length; i++) {
-    for (let p = 0; p < parties.length - 1; p++) {
-      if (subjects[i].parties[p].position == answers[i]) {
+    for (let parIndex = 0; parIndex < parties.length - 1; parIndex++) {
+      if (subjects[i].parties[parIndex].position == answers[i].opinion) {
         for (let index = 0; index < parties.length; index++) {
-          if (subjects[i].parties[p].name == parties[index].name) {
-            if (!parties[index].score) parties[index].score = 1;
-            else parties[index].score = parties[index].score + 1;
+          if (subjects[i].parties[parIndex].name == parties[index].name) {
+            if (answers[i]["checked"] == true) {
+              if (!parties[index].score) parties[index].score = 2;
+              else parties[index].score = parties[index].score + 2;
+            } else {
+              if (!parties[index].score) parties[index].score = 1;
+              else parties[index].score = parties[index].score + 1;
+            }
           }
         }
       }
