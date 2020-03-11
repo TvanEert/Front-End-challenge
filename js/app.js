@@ -88,6 +88,7 @@ function initMainP() {
 }
 
 function updateQuestion(answer) {
+  //Check
   if (checkBox.checked) answers.push({ opinion: answer, checked: true });
   else answers.push({ opinion: answer, checked: false });
   if (counter < subjects.length - 1) {
