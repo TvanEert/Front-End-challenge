@@ -149,35 +149,49 @@ function displayResult(arg) {
   resultPage.innerHTML = "";
   calcScore();
 
+  //sort parties from most score to lowest.
   parties.sort((a, b) => parseFloat(b.score) - parseFloat(a.score));
 
   for (let parNumber = 0; parNumber < parties.length; parNumber++) {
+    //if the arg is sec display only sec parties.
     if (arg == "sec") {
+      //check current partie if secular is true.
       if (parties[parNumber].secular == true) {
         let pScores = document.createElement("p");
+        //if the partie score exists add that score + the name to the p element.
         if (parties[parNumber].score) {
-          pScores.innerHTML = parties[parNumber].name + " " + parties[parNumber].score;
+          pScores.innerHTML =
+            parties[parNumber].name + " " + parties[parNumber].score;
+          //append the current element tot the result container
           resultContainer.appendChild(pScores);
-        } else {
+        }
+        //if partie score does not exist add the partie name + 0 string.
+        else {
           pScores.innerHTML = parties[parNumber].name + " 0";
           nulContainer.appendChild(pScores);
         }
       }
-    } else if (arg == "size") {
+    }
+    //if arg is size only display lagre parties
+    else if (arg == "size") {
       if (parties[parNumber].size >= large) {
         let pScores = document.createElement("p");
         if (parties[parNumber].score) {
-          pScores.innerHTML = parties[parNumber].name + " " + parties[parNumber].score;
+          pScores.innerHTML =
+            parties[parNumber].name + " " + parties[parNumber].score;
           resultContainer.appendChild(pScores);
         } else {
           pScores.innerHTML = parties[parNumber].name + " 0";
           nulContainer.appendChild(pScores);
         }
       }
-    } else if (arg == "all") {
+    }
+    //if arg is all dsiplay all the parties.
+    else if (arg == "all") {
       let pScores = document.createElement("p");
       if (parties[parNumber].score) {
-        pScores.innerHTML = parties[parNumber].name + " " + parties[parNumber].score;
+        pScores.innerHTML =
+          parties[parNumber].name + " " + parties[parNumber].score;
         resultContainer.appendChild(pScores);
       } else {
         pScores.innerHTML = parties[parNumber].name + " 0";
