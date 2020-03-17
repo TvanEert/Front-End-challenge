@@ -110,7 +110,7 @@ function back() {
   if (counter > 0) {
     answers.pop();
     counter--;
-    title.innerHTML = counter - 1 + ". " + subjects[counter].title;
+    title.innerHTML = counter + 1 + ". " + subjects[counter].title;
     question.innerHTML = subjects[counter].statement;
     console.log(answers);
   }
