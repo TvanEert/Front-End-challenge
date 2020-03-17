@@ -77,6 +77,7 @@ largeBtn.addEventListener("click", () => {
 
 //Init main page.
 function initMainP() {
+  mainPage.style.display = "initial";
   mainPageBtns.style.display = "flex";
   backBtn.style.display = "initial";
   title.innerHTML = counter + 1 + ". " + subjects[0].title;
