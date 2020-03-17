@@ -29,12 +29,11 @@ const checkBox = document.getElementById("checkBox");
 
 //Numbers
 let counter = 0;
-let questionNum = 1;
 let large = 10;
 
 let answers = [];
 
-//Button Events
+//Button Events.
 startBtn.addEventListener("click", () => {
   startPage.innerHTML = "";
   initMainP();
@@ -65,11 +64,10 @@ btnSkip.addEventListener("click", () => {
   checkBox.checked = false;
 });
 
-//Filter buttons
+//Filter buttons.
 allBtn.addEventListener("click", () => {
   displayResult("all");
 });
-
 secBtn.addEventListener("click", () => {
   displayResult("sec");
 });
@@ -77,54 +75,66 @@ largeBtn.addEventListener("click", () => {
   displayResult("size");
 });
 
-//Init main page
+//Init main page.
 function initMainP() {
   mainPageBtns.style.display = "flex";
   backBtn.style.display = "initial";
-  title.innerHTML = questionNum + ". " + subjects[0].title;
+  title.innerHTML = counter + 1 + ". " + subjects[0].title;
   question.innerHTML = subjects[0].statement;
   MainPText.appendChild(title);
   MainPText.appendChild(question);
 }
 
 function updateQuestion(answer) {
-  //Check
+  //Check if the check box is ticked if it is push checked is true.
   if (checkBox.checked) answers.push({ opinion: answer, checked: true });
+  //Check if the check box is ticked if it isn't push checked is false.
   else answers.push({ opinion: answer, checked: false });
+  //if the counter reaches 29 then the else.
   if (counter < subjects.length - 1) {
     counter++;
-    questionNum++;
-    title.innerHTML = questionNum + ". " + subjects[counter].title;
+    title.innerHTML = counter + 1 + ". " + subjects[counter].title;
     question.innerHTML = subjects[counter].statement;
     console.log(answers);
-  } else {
+  }
+  //deletes the main page then shows the result page.
+  else {
     console.log(answers);
     mainPage.innerHTML = "";
     resultPage.style.display = "initial";
   }
 }
 
+//back function to go back a question.
 function back() {
   if (counter > 0) {
     answers.pop();
     counter--;
-    questionNum--;
-    title.innerHTML = questionNum + ". " + subjects[counter].title;
+    title.innerHTML = counter - 1 + ". " + subjects[counter].title;
     question.innerHTML = subjects[counter].statement;
     console.log(answers);
   }
 }
 
+//function to calculate the score.
 function calcScore() {
   for (let i = 0; i < answers.length; i++) {
     for (let parIndex = 0; parIndex < parties.length - 1; parIndex++) {
+      // loops through the parties postions and look for a matching opinion.
       if (subjects[i].parties[parIndex].position == answers[i].opinion) {
         for (let index = 0; index < parties.length; index++) {
+          //if macthing opinion found loop through parties to find a matching name where you can add the score.
           if (subjects[i].parties[parIndex].name == parties[index].name) {
+            //Check if you had the checkbox ticked for this question.
+            //If that is true then add 2 points of score
             if (answers[i]["checked"] == true) {
+              //If score doesn't exist in the current partie create it for the current partie.
               if (!parties[index].score) parties[index].score = 2;
+              //If score does exist in the current partie up the score.
               else parties[index].score = parties[index].score + 2;
-            } else {
+            }
+            //Else add 1 point
+            else {
               if (!parties[index].score) parties[index].score = 1;
               else parties[index].score = parties[index].score + 1;
             }
